@@ -1,0 +1,30 @@
+﻿@model IList<Course>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">  
+   <h1 class="display-4">Välkommen till Mariatorgets thai restaurang</h1>  
+   <p>Upplev autentiska thailändska smaker i hjärtat av södermalm. Vi erbjuder en meny med traditionella rätter tillagade med färska ingredienser och kärlek.</p>  
+</div>
+
+@if (Model.Any())
+{
+    <h3>Här är våra populäraste rätter</h3>
+    <div>
+        @foreach (var course in Model)
+        {
+            <div>
+				<h4>@course.CourseName</h4>
+				<p>@course.Description</p>
+				<p>Pris: @course.Price kr</p>
+            </div>
+        }
+    </div>
+}
+
+else
+{
+	<h3>Menyn kunde inte laddas</h3>
+}
