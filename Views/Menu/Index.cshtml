@@ -1,0 +1,23 @@
+﻿@model IList<Course>
+@{
+    ViewData["Title"] = "Meny";
+}
+<h1 class="text-center">Vår Meny</h1>
+
+@if (Model.Any())
+{
+	<div class="text-center">
+		@foreach (var course in Model)
+		{
+			<div class="course-item mb-4 p-3 border rounded">
+				<h4 class="course-name">@course.CourseName</h4>
+				<p class="course-description">@course.Description</p>
+				<p class="course-price">Pris:@course.Price kr</p>
+			</div>
+		}
+	</div>
+}
+else
+{
+	<h3 class="text-center">Menyn kunde inte laddas</h3>
+}

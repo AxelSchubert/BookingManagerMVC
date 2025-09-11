@@ -11,16 +11,16 @@
 
 @if (Model.Any())
 {
-    <h3>Här är våra populäraste rätter</h3>
-    <div>
+    <div class="text-center">   
+        <h3>Här är våra populäraste rätter</h3>
         @foreach (var course in Model)
-        {
-            <div>
-				<h4>@course.CourseName</h4>
-				<p>@course.Description</p>
-				<p>Pris: @course.Price kr</p>
-            </div>
-        }
+            {
+                <div>
+				    <h4>@course.CourseName</h4>
+				    <p>@course.Description</p>
+				    <p>Pris: @course.Price kr</p>
+                </div>
+            }
     </div>
 }
 
