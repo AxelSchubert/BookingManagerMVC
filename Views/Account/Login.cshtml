@@ -1,0 +1,20 @@
+﻿@model BookingManagerMVC.Models.ViewModels.LoginVM
+@{
+	ViewData["Title"] = "Logga in";
+}
+
+
+
+<h1 class="text-center">Logga in</h1>
+<form asp-action="Login" method="post">
+    <div class="mb-3">
+        <label asp-for="Username" class="form-label"></label>
+        <input asp-for="Username" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password    " class="form-label"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary"> Logga in </button>
+</form>

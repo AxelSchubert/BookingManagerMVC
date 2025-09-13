@@ -1,3 +1,5 @@
+using BookingManagerMVC.Services;
+
 namespace BookingManagerMVC
 {
     public class Program
@@ -8,6 +10,22 @@ namespace BookingManagerMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDistributedMemoryCache(); // lagrar session i minnet
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // hur länge sessionen är giltig
+                options.Cookie.HttpOnly = true; // skyddar mot JS-access
+                options.Cookie.IsEssential = true; // behövs även om användaren inte accepterar cookies
+            });
+            builder.Services.AddScoped<MenuService>();
+            builder.Services.AddScoped<AuthService>();
+
+            builder.Services.AddHttpClient("BookingApi", client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+            });
+
 
             var app = builder.Build();
 

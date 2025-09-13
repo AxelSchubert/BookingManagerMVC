@@ -24,7 +24,7 @@ namespace BookingManagerMVC.Controllers
               new Course { Id = 4, CourseName = "Stekt Ris", Price = 110, Description = "Stekt ris med kycling, biff, räkor eller tofu", IsPopular = true }
             };
 
-            var popularCourses = courses.Where(c => c.IsPopular).ToList();
+            var popularCourses = courses.Where(c => c.IsPopular.Value).ToList();
 
             return View(popularCourses);
         }
