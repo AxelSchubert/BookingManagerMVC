@@ -1,6 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using BookingManagerMVC.Models;
 using BookingManagerMVC.Models.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BookingManagerMVC.Services
 {
@@ -26,7 +29,18 @@ namespace BookingManagerMVC.Services
                 var handler = new JwtSecurityTokenHandler();
                 var jwtObject = handler.ReadJwtToken(jwt);
 
+                var claims = jwtObject.Claims.ToList();
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
                 var httpContext = _httpContextAccessor.HttpContext;
+
+                await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = jwtObject.ValidTo
+                });
 
                 httpContext.Response.Cookies.Append("jwtToken", jwt, new CookieOptions
                 {
@@ -41,6 +55,12 @@ namespace BookingManagerMVC.Services
             return false;
         }
 
+        public async Task Logout()
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+            await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            httpContext.Response.Cookies.Delete("jwtToken");
+        }
 
     }
 }

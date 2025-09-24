@@ -31,22 +31,24 @@ namespace BookingManagerMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Error = "Både användarnamn och lösenord måste fyllas i";
                 return View(viewModel);
             }
 
             var loginSuccessful = await _authService.Login(viewModel);
             if (loginSuccessful == false)
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                //ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ViewBag.Error = "Användarnamn eller lösenord är felaktigt";
                 return View(viewModel);
             }
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.Response.Cookies.Delete("jwtToken");
-            return RedirectToAction("Login", "Account");
+            await _authService.Logout();
+            return RedirectToAction("Index", "Home");
         }
 
     }

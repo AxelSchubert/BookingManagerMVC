@@ -1,4 +1,5 @@
 using BookingManagerMVC.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BookingManagerMVC
 {
@@ -11,6 +12,15 @@ namespace BookingManagerMVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";   // redirect if not logged in
+        options.LogoutPath = "/Account/Logout";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
+
+            builder.Services.AddAuthorization();
             builder.Services.AddDistributedMemoryCache(); // lagrar session i minnet
             builder.Services.AddSession(options =>
             {
@@ -42,6 +52,7 @@ namespace BookingManagerMVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
