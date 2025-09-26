@@ -30,6 +30,7 @@ namespace BookingManagerMVC
             });
             builder.Services.AddScoped<MenuService>();
             builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<AdminService>();
 
             builder.Services.AddHttpClient("BookingApi", client =>
             {

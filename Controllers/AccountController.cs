@@ -42,7 +42,7 @@ namespace BookingManagerMVC.Controllers
                 ViewBag.Error = "Användarnamn eller lösenord är felaktigt";
                 return View(viewModel);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Admin");
         }
         [HttpPost]
         public async Task<IActionResult> Logout()

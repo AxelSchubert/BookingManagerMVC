@@ -1,0 +1,48 @@
+﻿@model Course
+
+@{
+   var isPopularOptions = new List<SelectListItem>
+   {
+       new SelectListItem { Text = "Yes", Value = "true", Selected = @Model.IsPopular ?? false },
+       new SelectListItem { Text = "No", Value = "false", Selected = !(@Model.IsPopular ?? false) }
+   };
+}
+
+<div class="modal fade" id="editCourseModal-@Model.Id" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog">
+       <div class="modal-content">
+           <form asp-controller="Admin" asp-action="EditCourse" method="post">
+               <div class="modal-header">
+                   <h5 class="modal-title">Redigera maträtt</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <input type="hidden" name="Id" value="@Model.Id" />
+                   <div class="mb-3">
+					<label class="form-label">Namn</label>
+                       <input type="text" name="CourseName" class="form-control" value="@Model.CourseName" />
+                   </div>
+                   <div class="mb-3">
+                       <label class="form-label">Beskrivning</label>
+                       <textarea name="Description" class="form-control">@Model.Description</textarea>
+                   </div>
+                   <div class="mb-3">
+                       <label class="form-label">Pris</label>
+                       <input type="number" name="Price" class="form-control" value="@Model.Price" />
+                   </div>
+                   <div class="mb-3">
+                       <label class="form-label">Är populär</label>
+                           <select name="IsPopular" class="form-select">  
+                              <option value="true" selected="@(Model.IsPopular == true)">Yes</option>  
+                              <option value="false" selected="@(Model.IsPopular == false)">No</option>  
+                           </select>
+                   </div>
+               </div>
+               <div class="modal-footer">
+                   @* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> *@
+                   <button type="submit" class="btn btn-primary">Spara ändringar</button>
+               </div>
+           </form>
+       </div>
+   </div>
+</div>

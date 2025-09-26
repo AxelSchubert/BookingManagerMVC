@@ -1,0 +1,40 @@
+﻿@model Booking
+
+<div class="modal fade" id="editCourseModal-@Model.Id" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-controller="Admin" asp-action="EditCourse" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Redigera bokning</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Starttid</label>
+                        <input type="text" name="Start" class="form-control" value="@Model.Start" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sluttid</label>
+                        <textarea name="End" class="form-control">@Model.End</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Antal gäster</label>
+                        <input type="number" name="NumberOfGuests" class="form-control" value="@Model.NumberOfGuests" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kundid</label>
+                        <input type="number" name="CustomerId" class="form-control" value="@Model.CustomerId" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bordsnummer</label>
+                        <input type="number" name="TableId" class="form-control" value="@Model.TableId" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Spara ändringar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

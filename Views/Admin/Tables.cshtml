@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IList<Table>
 @{
+	ViewData["Title"] = "Hantera bord";
+}
+<h1 class="text-center">Bord</h1>
+
+@if (Model.Any())
+{
+	<div class="text-center">
+		@foreach (var table in Model)
+		{
+			<div class="mb-4 p-3 border rounded">
+				<h4>Bordsnummer: @table.Id</h4>
+				<p>Kapacitet: @table.Capacity</p>
+				<div class="d-flex justify-content-center gap-2">
+					<form asp-controller="admin" asp-action="EditTable" method="post">
+						<input type="hidden" name="Id" value="@table.Id" />
+						<input type="number" name="Capacity" class="form-control" value="@table.Capacity">
+						<button type="submit" class="btn btn-primary">Ändra kapacitet</button>
+					</form>
+					<form asp-action="DeleteTable" method="post" style="margin:0;">
+						<input type="hidden" name="id" value="@table.Id" />
+						<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+					</form>
+				</div>
+			</div>
+		}
+	</div>
+}
+else
+{
+	<h3 class="text-center">Bord kunde inte laddas</h3>
 }

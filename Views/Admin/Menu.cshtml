@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IList<Course>
 @{
+	ViewData["Title"] = "Manage memu";
 }
+<h1 class="text-center">Hantera Meny</h1>
+
+@if (Model.Any())
+{
+	<div class="text-center">
+		@foreach (var course in Model)
+		{
+			<div class="course-item mb-4 p-3 border rounded">
+				<h4 class="course-name">@course.CourseName</h4>
+				<p class="course-description">@course.Description</p>
+				<p class="course-price">Pris:@course.Price kr</p>
+                <div class="d-flex justify-content-center gap-2">
+                    <button type="button" class="btn btn-success"
+                            data-bs-toggle="modal" data-bs-target="#editCourseModal-@course.Id">
+                        Edit
+                    </button>
+
+                    <form asp-action="DeleteCourse" method="post" style="margin:0;">
+                        <input type="hidden" name="id" value="@course.Id" />
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure?');">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+                @await Html.PartialAsync("_EditCourseModal", course)
+			</div>
+		}
+	</div>
+}
+else
+{
+	<h3 class="text-center">Menyn kunde inte laddas</h3>
+}
+<button type="button" class="btn btn-success text-center"
+        data-bs-toggle="modal" data-bs-target="#createCourseModal">
+    Lägg till ny maträtt
+</button>
+@await Html.PartialAsync("_CreateCourseModal", new Course())

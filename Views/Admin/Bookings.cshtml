@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IList<Booking>
 @{
+	ViewData["Title"] = "Manage bookings";
 }
+<h1 class="text-center">Hantera bokningar</h1>
+
+@if (Model.Any())
+{
+	<div class="text-center">
+		@foreach (var booking in Model)
+		{
+			<div class="mb-4 p-3 border rounded">
+				<p>Starttid: @booking.Start</p>
+				<p>Sluttid: @booking.End</p>
+				<p>Antal gäster: @booking.NumberOfGuests</p>
+				<p>Gäst-id: @booking.CustomerId</p>
+				<p>Bordsnummer: @booking.TableId</p>
+				<div class="d-flex justify-content-center gap-2">
+					 <button type="button" class="btn btn-success"
+                            data-bs-toggle="modal" data-bs-target="#editCourseModal-@booking.Id">
+                        Edit
+                    </button>
+					<form asp-action="DeleteBooking" method="post" style="margin:0;">
+						<input type="hidden" name="id" value="@booking.Id" />
+						<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+					</form>
+				</div>
+				@await Html.PartialAsync("_EditBookingModal", booking)
+			</div>
+		}
+	</div>
+}
+else
+{
+	<h3 class="text-center">Bokningar kunde inte laddas</h3>
+}
+<button type="button" class="btn btn-success text-center"
+		data-bs-toggle="modal" data-bs-target="#createBookingModal">
+	Lägg till nytt bord
+</button>
+
