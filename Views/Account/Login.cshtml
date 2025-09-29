@@ -4,22 +4,26 @@
 }
 
 
+<div class="text-center bg-gradient text-contrast rounded-3 border border-4 border-gold w-75 mb-4 mx-auto p-4">
+    <h1 class="text-center">Logga in</h1>
+</div>
+<div class="text-center bg-gradient text-contrast rounded-3 border border-4 border-gold w-75 mx-auto p-4">
 
-<h1 class="text-center">Logga in</h1>
-<form asp-action="Login" method="post">
+    <form asp-action="Login" method="post">
     <div class="mb-3">
         <label asp-for="Username" class="form-label"></label>
         <input asp-for="Username" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label asp-for="Password    " class="form-label"></label>
-        <input asp-for="Password" class="form-control" />
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" class="form-control" type="password"/>
     </div>
     <button type="submit" class="btn btn-primary"> Logga in </button>
 </form>
 
 @if (ViewBag.Error != null)
 {
-    <p>@ViewBag.Error</p>
+    <p class="text-contrast">@ViewBag.Error</p>
 }
+</div>

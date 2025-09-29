@@ -2,19 +2,25 @@
 @{
 	ViewData["Title"] = "Manage memu";
 }
-<h1 class="text-center">Hantera Meny</h1>
-
+<div class="text-center bg-gradient text-contrast rounded-3 border border-4 border-gold w-75 mb-4 mx-auto p-4">
+    <h1 class="text-center">Hantera meny</h1>
+</div>
+<div class="d-flex justify-content-start mb-3 ms-3">
+    <a href="/admin" class="btn btn-primary">
+        Tillbaka
+    </a>
+</div>
 @if (Model.Any())
 {
 	<div class="text-center">
 		@foreach (var course in Model)
 		{
-			<div class="course-item mb-4 p-3 border rounded">
-				<h4 class="course-name">@course.CourseName</h4>
+            <div class="text-center bg-gradient text-contrast rounded-3 border border-4 border-gold w-50 mb-4 mx-auto p-4">
+                <h4 class="course-name">@course.CourseName</h4>
 				<p class="course-description">@course.Description</p>
 				<p class="course-price">Pris:@course.Price kr</p>
                 <div class="d-flex justify-content-center gap-2">
-                    <button type="button" class="btn btn-success"
+                    <button type="button" class="btn btn-warning"
                             data-bs-toggle="modal" data-bs-target="#editCourseModal-@course.Id">
                         Edit
                     </button>
@@ -36,8 +42,10 @@ else
 {
 	<h3 class="text-center">Menyn kunde inte laddas</h3>
 }
+<div class="text-center text-contrast rounded-3 w-10 mx-auto p-4">
 <button type="button" class="btn btn-success text-center"
         data-bs-toggle="modal" data-bs-target="#createCourseModal">
     Lägg till ny maträtt
 </button>
+</div>
 @await Html.PartialAsync("_CreateCourseModal", new Course())

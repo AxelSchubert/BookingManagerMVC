@@ -20,7 +20,7 @@ namespace BookingManagerMVC.Controllers
         public async Task<IActionResult> Tables()
         {
             var tables = await _adminService.GetAsync<Table>("Table");
-            return View(tables); 
+            return View(tables);
         }
 
         public async Task<IActionResult> Bookings()
@@ -129,4 +129,5 @@ namespace BookingManagerMVC.Controllers
             }
             return BadRequest();
         }
+    }
 }

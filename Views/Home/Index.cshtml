@@ -4,14 +4,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">  
-   <h1 class="display-4">Välkommen till Mariatorgets thai restaurang</h1>  
-   <p>Upplev autentiska thailändska smaker i hjärtat av södermalm. Vi erbjuder en meny med traditionella rätter tillagade med färska ingredienser och kärlek.</p>  
+<div class="text-center bg-gradient text-contrast rounded-3 border border-4 border-gold w-75 mb-4 mx-auto p-4">  
+   <h1 class="display-4 fw-bolder">Välkommen till Mariatorgets thai restaurang</h1>  
+   <p class="fs-4">Upplev autentiska thailändska smaker i hjärtat av södermalm. Vi erbjuder en meny med traditionella rätter tillagade med färska ingredienser och kärlek.</p>  
 </div>
 
 @if (Model.Any())
 {
-    <div class="text-center">   
+    <div class="text-center bg-gradient text-contrast rounded-3 border border-4 border-gold w-75 w- mx-auto p-4">
         <h3>Här är våra populäraste rätter</h3>
         @foreach (var course in Model)
             {
@@ -26,5 +26,7 @@
 
 else
 {
+<div class="text-center bg-gradient text-contrast rounded-3 border border-4 border-gold w-75 mb-4 mx-auto p-4">  
 	<h3>Menyn kunde inte laddas</h3>
+</div>
 }

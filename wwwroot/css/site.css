@@ -21,8 +21,51 @@ body {
   margin-bottom: 60px;
 }
 
+.w-10 {
+    width: 10%;
+}
+
 /*.digit-input {
     width: 5ch;
     /*text-align: center;
     position: center;
 }*/
+
+body {
+    background-image: url('/images/background-wallpaper.jpg');
+    background-repeat: repeat; 
+/*    background-attachment: fixed;*/
+    background-position: top left; 
+}
+
+.bg-gradient {
+    background: linear-gradient(to right, #27692B, #449b49) !important;
+}
+
+.text-contrast {
+    color: #fcedd1 !important;
+}
+
+.navbar-light .nav-link.text-contrast {
+    color: #fcedd1 !important;
+}
+
+.navbar .navbar-brand.text-contrast {
+    color: #fcedd1 !important;
+}
+
+.navbar .nav-link {
+    color: #000 !important;
+}
+
+.border-gold {
+    border-color: #C9A341 !important;
+}
+
+.border-bottom-gold {
+    border-bottom: 4px solid #C9A341 !important;
+}
+
+.border-top-gold {
+    border-top: 4px solid #C9A341 !important;
+}
